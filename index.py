@@ -1,12 +1,8 @@
-import os
-from together import Together
+import requests
 
-client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+url = 'http://localhost:5000/upload'
+files = "/Users/B0295868/Downloads/together-1.1.2/testing.jsonl"
+response = requests.post(url, files=files)
 
-response = client.images.generate(
-    prompt="space robots",
-    model="stabilityai/stable-diffusion-xl-base-1.0",
-    steps=10,
-    n=4,
-)
-print(response.data[0].b64_json)
+print("Status Code:", response.status_code)
+print("Response Body:", response.json())
